@@ -1,0 +1,79 @@
+<div class = "flex flex-row flex-wrap" >
+  <div class = "w-2/3   " >
+
+    <div *ngFor = "let product of selectedObjects$ | async; let indexOfElement=index;"
+         class = "mb-4 mt-10 w-full  p-6 shadow-md bg-green-50 rounded-3xl" >
+      <div class = "mb-4 flex justify-between" >
+        <h1 class = "text-2xl font-black" >{{product.title}}</h1 >
+        <h1 class = "text-2xl font-black" >{{product.price | currency}}</h1 >
+      </div >
+
+      <div [formGroup] = "product.extraInfo"
+           class = "flex flex-col" >
+        <div class = "mb-6" >
+          <label for = "large-input"
+                 class = "mb-2 block text-sm font-medium  " >Insert Your Instagram Post Link</label >
+          <input formControlName = "field1"
+                 type = "text"
+                 id = "large-input"
+                 class = "block w-full rounded-lg border border-gray-300 bg-gray-50 p-4 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:border-gray-600   sm:text-md" >
+          <div class="text-red-500" *ngIf="product.extraInfo.controls['field1'].invalid && product.extraInfo.controls['field1'].touched">
+            Field 1 is required.
+          </div>
+        </div >
+        <div class = "mb-6" >
+          <label for = "large-input"
+                 class = "mb-2 block text-sm font-medium " >Insert the Username of your competitor</label >
+          <input formControlName = "field2"
+                 type = "text"
+                 id = "large-input2"
+                 class = "block w-full rounded-lg border border-gray-300 bg-gray-50 p-4 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:border-gray-600  sm:text-md" >
+          <div class="text-red-500" *ngIf="product.extraInfo.controls['field2'].invalid && product.extraInfo.controls['field2'].touched">
+            Field 2 is required.
+          </div>
+          <h1>{{product.extraInfo.controls['field2'].value}}</h1>
+        </div >
+      </div >
+
+      <button (click) = "addNewItem(product)"
+              type = "button"
+              class = "text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" >
+        Add More
+      </button >
+      <button (click) = "removeProduct(indexOfElement)"
+              type = "button"
+              class = "text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" >
+        Delete{{indexOfElement}}
+      </button >
+
+
+    </div >
+
+
+  </div >
+  <div class = "sticky top-0 h-[calc(100vh-110px)] w-1/3 p-6 flex items-center " >
+    <div class = "flex w-full flex-col bg-green-100 p-6 shadow-md rounded-3xl" >
+      <div class = "mb-10" >
+        <h1 class = "text-2xl" >The total is:</h1 >
+        <h1 class = "text-4xl font-black" >{{totalPrice$ | async|currency}} </h1 >
+      </div >
+
+      <div class = "mb-6" >
+        <label for = "large-input"
+               class = "mb-2 block text-sm font-medium " >Enter your Email Address</label >
+        <input type = "text"
+               class = "block w-full rounded-lg border border-gray-300 bg-gray-50 p-4 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white sm:text-md" >
+      </div >
+
+      <button type = "button"
+              class = "rounded-lg bg-gradient-to-br from-pink-500 to-orange-400 p-4 text-center text-2xl font-medium text-white hover:bg-gradient-to-bl focus:outline-none focus:ring-4 focus:ring-pink-200 dark:focus:ring-pink-800" >
+        Checkout
+      </button >
+
+    </div >
+
+
+  </div >
+</div >
+
+
